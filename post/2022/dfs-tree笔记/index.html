@@ -65,9 +65,9 @@
     
       <a href='/tags/笔记/'>笔记</a> 
     
-      <a href='/tags/待补/'>待补</a> 
-    
       <a href='/tags/OI/'>OI</a> 
+    
+      <a href='/tags/待补/'>待补</a> 
     
     </span>
   
@@ -79,6 +79,17 @@
 <h2 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">	low[u]=dfn[u]=++dfncnt;</span><br><span class="line">	stk.<span class="built_in">push</span>(u);</span><br><span class="line">	in_stack[u]=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=frm[u];i;i=nxt[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[to[i]])&#123; <span class="comment">//没有搜索过</span></span><br><span class="line">			<span class="built_in">tarjan</span>(to[i]);</span><br><span class="line">			low[u]=<span class="built_in">min</span>(low[u],low[to[i]]);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(in_stack[to[i]])&#123; <span class="comment">//已经在栈中</span></span><br><span class="line">			low[u]=<span class="built_in">min</span>(low[u],dfn[to[i]]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//已不在栈中，已处理完毕，什么也不用做</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dfn[u]==low[u])&#123; <span class="comment">//找到强连通分量</span></span><br><span class="line">		scccnt++;</span><br><span class="line">		<span class="type">int</span> tmp;</span><br><span class="line">		<span class="keyword">do</span>&#123;</span><br><span class="line">			tmp=S.<span class="built_in">top</span>();</span><br><span class="line">			S.<span class="built_in">pop</span>();</span><br><span class="line">			in_stack[tmp]=<span class="number">0</span>;</span><br><span class="line">			belong[tmp]=scccnt;</span><br><span class="line">			scc[scccnt].<span class="built_in">push_back</span>(tmp);</span><br><span class="line">			num[scccnt]++;</span><br><span class="line">		&#125;<span class="keyword">while</span>(tmp!=u);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.loli.net/2022/04/11/hIgcsKWM4ZvzdeL.png" alt="tarjan.PNG"></p>
 <h2 id="割点"><a href="#割点" class="headerlink" title="割点"></a>割点</h2><p>对于一个<strong>无向图</strong>，如果把一个点删除后这个图的极大连通分量数增加了，那么这个点就是这个图的割点。</p>
+<ul>
+<li>当<code>u</code>不是dfs树的根节点，如果 <code>u</code> 存在一个子结点 <code>v</code> 满足 <code>low[v]&gt;=dfn[u]</code>，那么 <code>u</code> 为割点。</li>
+<li>当<code>u</code>是dfs树的根节点，如果 <code>u</code> 有两个以上儿子，那么 <code>u</code> 为割点。否则不是。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/12/I6ZhoqyKwFazLen.png" alt="g1.PNG"></p>
+<p>此图中根 $1$ 不是割点。</p>
+<p><img src="https://s2.loli.net/2022/04/12/qJ6Xlcy8RFI1NsL.png" alt="g2.PNG"></p>
+<p>此图中根 $1$ 是割点。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> child=<span class="number">0</span>;</span><br><span class="line">	dfn[u]=low[u]=++dfncnt;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=frm[u];i;i=nxt[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[to[i]])&#123;</span><br><span class="line">			child++;</span><br><span class="line">			<span class="built_in">tarjan</span>(to[i],u);</span><br><span class="line">			low[u]=<span class="built_in">min</span>(low[u],low[to[i]]);</span><br><span class="line">			<span class="keyword">if</span>(low[to[i]]&gt;=dfn[u]&amp;&amp;fa!=u&amp;&amp;!vis[u])&#123;</span><br><span class="line">				cp++; </span><br><span class="line">				vis[u]=<span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		low[u]=<span class="built_in">min</span>(low[u],dfn[to[i]]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(child&gt;<span class="number">1</span>&amp;&amp;fa==u)vis[u]=<span class="number">1</span>,cp++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="割边"><a href="#割边" class="headerlink" title="割边"></a>割边</h2><p>与割点几乎一样，只需把<code>low[to[i]]&gt;=dfn[u]</code>改为<code>low[to[i]]&gt;dfn[u]</code>，且不需考虑根节点的问题。</p>
 
   </section>
   <footer class="post-footer">
@@ -99,8 +110,8 @@
     
     <span class="page-number">•</span>
     
-    <a class="older-posts" href="/post/2022/%E2%80%9C%E6%96%B0%E5%86%A0%E7%97%85%E6%AF%92%E4%B8%BA%E7%BE%8E%E5%9B%BD%E5%88%B6%E9%80%A0%E2%80%9D%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BF%A1%EF%BC%9F/">
-        <!--“新冠病毒为美国制造”是否可信？--> next →
+    <a class="older-posts" href="/post/2022/%E5%AF%B9%E6%95%B0%E7%AC%94%E8%AE%B0/">
+        <!--对数笔记--> next →
     </a>
     
 </nav>

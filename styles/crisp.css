@@ -130,8 +130,12 @@ ul, ol {
 }
 code {
 	/*for code highlighting */
-	font-size:1.4em;
 	background: #eee;
+}
+.highlight {
+	tab-size: 4;
+	-o-tab-size: 4;
+	-moz-tab-size: 4;
 }
 pre {
 	font-size: 0.8em;

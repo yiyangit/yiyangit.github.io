@@ -67,7 +67,7 @@ p, hr, h4, h5, h6 {
 }
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Bree Serif", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", serif;
+	font-family: "Consolas", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", serif;
 	font-weight: 400 !important;
 }
 h1 {
@@ -130,7 +130,7 @@ ul, ol {
 }
 code {
 	/*for code highlighting */
-	font-size:1.4em;
+	font-size:1em;
 	background: #eee;
 }
 pre {

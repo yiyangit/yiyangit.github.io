@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/asset/locklink.jpg"/>
+        <link rel="alternate" type="application/rss+xml" title="Locklink" href="">
+        <title>ACM刷题笔记 | Locklink&#39;s fantastic landscape</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        </script>
+    <meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/locklink.jpg" alt="Locklink's fantastic landscape" /></a>
+            <h1><a href="/">Locklink</a></h1>
+            <p>一つの幸福に集約された。今日と言う日は人類が真の幸福の舵を切った輝かしい歴史の転換である</p>
+            <div id="follow-icons">
+          <a target="_blank" rel="noopener" href="http://github.com/yiyangit"><i class="fa fa-github-square fa-2x"></i></a>
+          </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  July 19, 2025
+  
+
+  <h1 class="post-title">ACM刷题笔记</h1>
+  <section class="post-content article-entry">
+    <h3 id="abc410d-xor-shortest-walk"><a class="markdownIt-Anchor" href="#abc410d-xor-shortest-walk"></a> abc410D XOR Shortest Walk</h3>
+<p>给定一个有向图，包含N个顶点和M条边。顶点编号为1到N，边编号为1到M。其中第i条边是从顶点A<br>
+i指向顶点Bi的带权有向边，权值为Wi。请找出从顶点1到顶点N的所有可行路径中，路径包含边的权值进行按位XOR运算后的最小值。<br>
+N,M&lt;=1000，0≤Wi&lt;2^10。</p>
+<h4 id="解析"><a class="markdownIt-Anchor" href="#解析"></a> 解析</h4>
+<p>暴力dfs在极端情况下可能路径过多TLE，如果多条路径到达顶点u并产生相同的异或值x，每条路径都会继续向下递归，重复探索相同的子问题。考虑特殊的“顶点复用”搜索方式，本质上是一种记忆化搜索：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,m,Ans=<span class="number">1e9</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">E</span>{<span class="type">int</span> to;<span class="type">int</span> val;};</span><br><span class="line"><span class="type">int</span> vis[<span class="number">1005</span>][<span class="number">10005</span>];</span><br><span class="line">vector&lt;E&gt; G[<span class="number">1005</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">if</span>(vis[u][x])<span class="keyword">return</span>;</span><br><span class="line">	vis[u][x]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G[u].<span class="built_in">size</span>();i++){</span><br><span class="line">		<span class="type">int</span> v=G[u][i].to,w=G[u][i].val;</span><br><span class="line">		<span class="built_in">dfs</span>(v,x^w);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++){</span><br><span class="line">		<span class="type">int</span> frm,to,val;cin&gt;&gt;frm&gt;&gt;to&gt;&gt;val;</span><br><span class="line">		E e;e.to=to;e.val=val;</span><br><span class="line">		G[frm].<span class="built_in">push_back</span>(e);</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">10000</span>;i++)<span class="keyword">if</span>(vis[n][i]){cout&lt;&lt;i&lt;&lt;endl;<span class="keyword">return</span> <span class="number">0</span>;}</span><br><span class="line">	cout&lt;&lt;<span class="number">-1</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>总状态数量最大在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>+</mo><mi>M</mi><mo stretchy="false">)</mo><mi>max</mi><mo>⁡</mo><msub><mi>W</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">(N+M)\max{W_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">max</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> 量级，符合要求。</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Locklink</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/articles/harmonics/">
+        <!--音乐理论学习笔记.和声学--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2025 Locklink. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+        </footer>
+    </body>
+</html>
+
+

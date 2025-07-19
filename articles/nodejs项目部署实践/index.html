@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
 		
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <link rel="shortcut icon" href="/asset/locklink.jpg"/>
-        <link rel="canonical" href="http://guolinn.com/">
         <link rel="alternate" type="application/rss+xml" title="Locklink" href="">
         <title>nodejs项目部署实践 | Locklink&#39;s fantastic landscape</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css">
         <meta name="HandheldFriendly" content="True" />
         <meta name="MobileOptimized" content="320" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,8 +21,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-    <meta name="generator" content="Hexo 7.3.0"></head>
+        
+        </script>
+    <meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
     
 		<body class="post-template">
 	
@@ -30,7 +33,7 @@
         <header id="header">
             <a id="logo" href="/"><img src="/asset/locklink.jpg" alt="Locklink's fantastic landscape" /></a>
             <h1><a href="/">Locklink</a></h1>
-            <p></p>
+            <p>一つの幸福に集約された。今日と言う日は人類が真の幸福の舵を切った輝かしい歴史の転換である</p>
             <div id="follow-icons">
           <a target="_blank" rel="noopener" href="http://github.com/yiyangit"><i class="fa fa-github-square fa-2x"></i></a>
           </div>
@@ -46,28 +49,36 @@
 
   <h1 class="post-title">nodejs项目部署实践</h1>
   <section class="post-content article-entry">
-    <h2 id="配置-nginx-反向代理"><a href="#配置-nginx-反向代理" class="headerlink" title="配置 nginx 反向代理"></a>配置 nginx 反向代理</h2><h3 id="安装-nginx"><a href="#安装-nginx" class="headerlink" title="安装 nginx"></a>安装 nginx</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># apt install nginx</span><br></pre></td></tr></table></figure>
-<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure>
-<h3 id="关于-nginx-配置"><a href="#关于-nginx-配置" class="headerlink" title="关于 nginx 配置"></a>关于 nginx 配置</h3><p>nginx 启动时，会加载 <code>/etc/nginx/nginx.conf</code> 配置文件。<br>而 <code>/etc/nginx/nginx.conf</code> 会引入：</p>
+    <h2 id="配置-nginx-反向代理"><a class="markdownIt-Anchor" href="#配置-nginx-反向代理"></a> 配置 nginx 反向代理</h2>
+<h3 id="安装-nginx"><a class="markdownIt-Anchor" href="#安装-nginx"></a> 安装 nginx</h3>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># apt install nginx</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="启动服务"><a class="markdownIt-Anchor" href="#启动服务"></a> 启动服务</h3>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br><span class="line">systemctl enable nginx</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="关于-nginx-配置"><a class="markdownIt-Anchor" href="#关于-nginx-配置"></a> 关于 nginx 配置</h3>
+<p>nginx 启动时，会加载 <code>/etc/nginx/nginx.conf</code> 配置文件。<br>
+而 <code>/etc/nginx/nginx.conf</code> 会引入：</p>
 <ul>
 <li><code>/etc/nginx/conf.d</code> 中以 .conf 结尾的配置文件</li>
-<li><code>/etc/nginx/sites-enabled</code> 中任何名称的配置文件<br>sites-available 中拥有名为 default 的配置文件以供参考。</li>
+<li><code>/etc/nginx/sites-enabled</code> 中任何名称的配置文件<br>
+sites-available 中拥有名为 default 的配置文件以供参考。</li>
 </ul>
 <p>sites-available 用于存放网站的配置文件，用于在需要时链接到 sites-enabled 中作为需要启用的网站：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/nginx/sites-available/aihara.conf</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name aih.locklink.moe;  # 替换为你实际使用的域名或IP地址</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://localhost:8000;  # 后端服务地址</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/nginx/sites-available/aihara.conf</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server {</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name aih.locklink.moe;  # 替换为你实际使用的域名或IP地址</span><br><span class="line"></span><br><span class="line">    location / {</span><br><span class="line">        proxy_pass http://localhost:8000;  # 后端服务地址</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>这里暂时没有使用 SSL。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># sudo ln -s /etc/nginx/sites-available/aihara.conf /etc/nginx/sites-enabled/ # 创建链接</span><br><span class="line"># nginx -t # 检查 Nginx 配置文件的语法正确性</span><br><span class="line"># systemctl reload nginx # 重启服务</span><br></pre></td></tr></table></figure>
-<h2 id="使用-Let’s-Encrypt-证书"><a href="#使用-Let’s-Encrypt-证书" class="headerlink" title="使用 Let’s Encrypt 证书"></a>使用 Let’s Encrypt 证书</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># apt install certbot python3-certbot-nginx -y</span><br><span class="line"># sudo certbot --nginx -d example.com -d www.example.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># sudo ln -s /etc/nginx/sites-available/aihara.conf /etc/nginx/sites-enabled/ # 创建链接</span><br><span class="line"># nginx -t # 检查 Nginx 配置文件的语法正确性</span><br><span class="line"># systemctl reload nginx # 重启服务</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="使用-lets-encrypt-证书"><a class="markdownIt-Anchor" href="#使用-lets-encrypt-证书"></a> 使用 Let’s Encrypt 证书</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># apt install certbot python3-certbot-nginx -y</span><br><span class="line"># sudo certbot --nginx -d example.com -d www.example.com</span><br></pre></td></tr></tbody></table></figure>
 <p><code>certbot</code> 应该会自动为你的站点生成证书并配置好 nginx ，非常方便。</p>
 <p>随后手动重启服务。</p>
 <p>但是这里申请的证书有效期只有三个月，可以从申请证书时的提示信息里知道。</p>
 <p>可以使用如下命令续期，并在续期结束后重启服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># certbot renew --renew-hook &quot;systemctl reload nginx&quot;</span><br><span class="line">Certificate not yet due for renewal</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># certbot renew --renew-hook "systemctl reload nginx"</span><br><span class="line">Certificate not yet due for renewal</span><br></pre></td></tr></tbody></table></figure>
 <p>这里提示还没到续期的时候，因为 Certbot 在证书到期前30天才可以续期。</p>
-<h2 id="部署-nodejs-应用"><a href="#部署-nodejs-应用" class="headerlink" title="部署 nodejs 应用"></a>部署 nodejs 应用</h2><p>WIP</p>
-<h2 id="CD-CI"><a href="#CD-CI" class="headerlink" title="CD&#x2F;CI"></a>CD&#x2F;CI</h2><p>WIP</p>
+<h2 id="部署-nodejs-应用"><a class="markdownIt-Anchor" href="#部署-nodejs-应用"></a> 部署 nodejs 应用</h2>
+<p>WIP</p>
+<h2 id="cdci"><a class="markdownIt-Anchor" href="#cdci"></a> CD/CI</h2>
+<p>WIP</p>
 
   </section>
   <footer class="post-footer">
@@ -81,6 +92,10 @@
 </article>
 
 <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/articles/git-commit/">
+        ← prev <!--【知识库】 git commit规范-->
+    </a>
     
     <span class="page-number">•</span>
     

@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
 		
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <link rel="shortcut icon" href="/asset/locklink.jpg"/>
-        <link rel="canonical" href="http://guolinn.com/">
         <link rel="alternate" type="application/rss+xml" title="Locklink" href="">
         <title>WSL下vscode开发环境配置记录 | Locklink&#39;s fantastic landscape</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css">
         <meta name="HandheldFriendly" content="True" />
         <meta name="MobileOptimized" content="320" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,8 +21,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-    <meta name="generator" content="Hexo 7.3.0"></head>
+        
+        </script>
+    <meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
     
 		<body class="post-template">
 	
@@ -30,7 +33,7 @@
         <header id="header">
             <a id="logo" href="/"><img src="/asset/locklink.jpg" alt="Locklink's fantastic landscape" /></a>
             <h1><a href="/">Locklink</a></h1>
-            <p></p>
+            <p>一つの幸福に集約された。今日と言う日は人類が真の幸福の舵を切った輝かしい歴史の転換である</p>
             <div id="follow-icons">
           <a target="_blank" rel="noopener" href="http://github.com/yiyangit"><i class="fa fa-github-square fa-2x"></i></a>
           </div>
@@ -47,32 +50,47 @@
   <h1 class="post-title">WSL下vscode开发环境配置记录</h1>
   <section class="post-content article-entry">
     <p>最近开始鼓捣自己的开发环境，Windows提供的WSL非常好用，但是在没人指导的情况下踩了不少坑，特此记录一下。</p>
-<h2 id="安装VScode"><a href="#安装VScode" class="headerlink" title="安装VScode"></a>安装VScode</h2><p>没啥好说的。官网 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> 下载。</p>
-<h2 id="安装WSL"><a href="#安装WSL" class="headerlink" title="安装WSL"></a>安装WSL</h2><p>powershell里执行命令<br><code>wsl --install</code><br>等待下载安装，设置 Linux 系统用户名和密码。</p>
+<h2 id="安装vscode"><a class="markdownIt-Anchor" href="#安装vscode"></a> 安装VScode</h2>
+<p>没啥好说的。官网 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> 下载。</p>
+<h2 id="安装wsl"><a class="markdownIt-Anchor" href="#安装wsl"></a> 安装WSL</h2>
+<p>powershell里执行命令<br>
+<code>wsl --install</code><br>
+等待下载安装，设置 Linux 系统用户名和密码。</p>
 <p>随后查看发行版版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Ubuntu</span><br><span class="line">Description:    Ubuntu 24.04.2 LTS</span><br><span class="line">Release:        24.04</span><br><span class="line">Codename:       noble</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Ubuntu</span><br><span class="line">Description:    Ubuntu 24.04.2 LTS</span><br><span class="line">Release:        24.04</span><br><span class="line">Codename:       noble</span><br></pre></td></tr></tbody></table></figure>
 <p>发现安装的是最新的 Ubuntu LTS 版本，对我来说完全够用的。</p>
 <p>然后再把 Windows 默认终端改成 Ubuntu。</p>
 <hr>
 <p>打开 WSL 终端时可能会提示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl: 检测到 localhost 代理配置，但未镜像到 wsl。nat 模式下的 wsl 不支持 localhost 代理。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl: 检测到 localhost 代理配置，但未镜像到 wsl。nat 模式下的 wsl 不支持 localhost 代理。</span><br></pre></td></tr></tbody></table></figure>
 <p>为了解决这个问题，在 <code>C:\Users\你的用户名</code> 下创建文件 <code>.wslconfig</code> ，输入以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[experimental]</span><br><span class="line">autoMemoryReclaim=gradual</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">dnsTunneling=true</span><br><span class="line">firewall=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></table></figure>
-<p>关闭 WSL：<code>wsl --shutdown</code><br>重新启动 WSL 终端。</p>
-<h2 id="启动-VSCode"><a href="#启动-VSCode" class="headerlink" title="启动 VSCode"></a>启动 VSCode</h2><h3 id="正确启动VSCode"><a href="#正确启动VSCode" class="headerlink" title="正确启动VSCode"></a>正确启动VSCode</h3><p>这一步看似没有必要说，实际上是踩的最大的一个坑（哭）。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[experimental]</span><br><span class="line">autoMemoryReclaim=gradual</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">dnsTunneling=true</span><br><span class="line">firewall=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></tbody></table></figure>
+<p>关闭 WSL：<code>wsl --shutdown</code><br>
+重新启动 WSL 终端。</p>
+<h2 id="启动-vscode"><a class="markdownIt-Anchor" href="#启动-vscode"></a> 启动 VSCode</h2>
+<h3 id="正确启动vscode"><a class="markdownIt-Anchor" href="#正确启动vscode"></a> 正确启动VSCode</h3>
+<p>这一步看似没有必要说，实际上是踩的最大的一个坑（哭）。</p>
 <p>昨天本来以为大功告成了，实际上后来遇到各种各样的问题，都是这一步埋下的雷。</p>
-<p>如果想让 vscode 和WSL系统无缝衔接，就<strong>不能</strong>在 Windows 的桌面图标&#x2F;任务栏&#x2F;开始菜单直接启动 vscode 。</p>
-<p><strong>应该</strong>：在 Linux 终端下，你的工作区里执行命令 <code>code .</code> </p>
+<p>如果想让 vscode 和WSL系统无缝衔接，就<strong>不能</strong>在 Windows 的桌面图标/任务栏/开始菜单直接启动 vscode 。</p>
+<p><strong>应该</strong>：在 Linux 终端下，你的工作区里执行命令 <code>code .</code></p>
 <p>初次启动可能会提示正在启动服务器啥的，等待即可。</p>
-<h3 id="安装扩展"><a href="#安装扩展" class="headerlink" title="安装扩展"></a>安装扩展</h3><p>在 WSL 中使用 vscode 通常必须安装 WSL 扩展来支持 vscode 和 WSL 之间的通信。<br>另外大部分已经安装的扩展需要重新在 WSL 的 vscode 中安装。</p>
-<h2 id="安装-Cline"><a href="#安装-Cline" class="headerlink" title="安装 Cline"></a>安装 Cline</h2><p>Cline 是一个 AI编程 vscode 扩展，可以自主编辑代码、执行命令。如果 vscode 没有正确从 WSL 启动，那么执行命令时 Cline 没办法和终端交互，就会出现 <code>Shell Integration Unavailable</code> 。网上的各种解决方案大部分都是针对 Mac 系统，基本没有提到 WSL 的（再哭）</p>
-<h2 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h2><p>还没摸索出来。WIP。</p>
-<h2 id="关于-pip"><a href="#关于-pip" class="headerlink" title="关于 pip"></a>关于 pip</h2><p>使用pip安装包的时候可能会出现 <code>error: externally-managed-environment</code>，这倒不是 WSL 的问题。</p>
+<h3 id="安装扩展"><a class="markdownIt-Anchor" href="#安装扩展"></a> 安装扩展</h3>
+<p>在 WSL 中使用 vscode 通常必须安装 WSL 扩展来支持 vscode 和 WSL 之间的通信。<br>
+另外大部分已经安装的扩展需要重新在 WSL 的 vscode 中安装。</p>
+<h2 id="安装-cline"><a class="markdownIt-Anchor" href="#安装-cline"></a> 安装 Cline</h2>
+<p>Cline 是一个 AI编程 vscode 扩展，可以自主编辑代码、执行命令。如果 vscode 没有正确从 WSL 启动，那么执行命令时 Cline 没办法和终端交互，就会出现 <code>Shell Integration Unavailable</code> 。网上的各种解决方案大部分都是针对 Mac 系统，基本没有提到 WSL 的（再哭）</p>
+<h2 id="配置-git"><a class="markdownIt-Anchor" href="#配置-git"></a> 配置 git</h2>
+<p>还没摸索出来。WIP。</p>
+<h2 id="关于-pip"><a class="markdownIt-Anchor" href="#关于-pip"></a> 关于 pip</h2>
+<p>使用pip安装包的时候可能会出现 <code>error: externally-managed-environment</code>，这倒不是 WSL 的问题。</p>
 <blockquote>
-<p>externally-managed-environment 错误背后的原因：Manjaro 、Ubuntu、Fedora 以及其他的最新发行版中，正在使用 Python 包来实现此增强功能。<br>这个更新是为了避免「操作系统包管理器 (如pacman、yum、apt) 和 pip 等特定于 Python 的包管理工具之间的冲突」。<br>这些冲突包括 Python 级 API 不兼容和文件所有权冲突。<br>（摘自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaohuaxishi/p/17515019.html">https://www.cnblogs.com/zhaohuaxishi/p/17515019.html</a> ）</p>
+<p>externally-managed-environment 错误背后的原因：Manjaro 、Ubuntu、Fedora 以及其他的最新发行版中，正在使用 Python 包来实现此增强功能。<br>
+这个更新是为了避免「操作系统包管理器 (如pacman、yum、apt) 和 pip 等特定于 Python 的包管理工具之间的冲突」。<br>
+这些冲突包括 Python 级 API 不兼容和文件所有权冲突。<br>
+（摘自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaohuaxishi/p/17515019.html">https://www.cnblogs.com/zhaohuaxishi/p/17515019.html</a> ）</p>
 </blockquote>
-<p>执行<br><code>sudo mv /usr/lib/python3.x/EXTERNALLY-MANAGED /usr/lib/python3.x/EXTERNALLY-MANAGED.bak</code> 即可。</p>
+<p>执行<br>
+<code>sudo mv /usr/lib/python3.x/EXTERNALLY-MANAGED /usr/lib/python3.x/EXTERNALLY-MANAGED.bak</code> 即可。</p>
 
   </section>
   <footer class="post-footer">

@@ -104,7 +104,7 @@ img, iframe {
 a {
 	font-weight:700;
 	text-decoration:none;
-	color: #5cc265; /* Change Link Color */
+	color: #2fb1f1; /* Change Link Color */
 }
 a:hover {
 	text-decoration:underline;
@@ -118,7 +118,7 @@ strong {
 blockquote {
 	border-left: 0.4em solid #eee;
 	padding-left: 1.2em;
-	font-size: 1.3em;
+	font-size: 1em;
 }
 hr{
  	border: 0;
@@ -463,4 +463,7 @@ pre .coffeescript .title {
 pre .keyword,
 pre .javascript .function {
   color: #c9c;
+}
+pre {
+	tab-size: 4;
 }

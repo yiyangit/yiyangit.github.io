@@ -50,7 +50,12 @@
   <h1 class="post-title">go语言学习笔记</h1>
   <section class="post-content article-entry">
     <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>作者较为熟悉C<ins>和JS的语法，因此可能主要会将go与C</ins>的语法进行对比。</p>
+<p>作者较为熟悉C++和JS的语法，因此可能主要会将go与C++的语法进行对比。</p>
+<h2 id="linux下安装"><a class="markdownIt-Anchor" href="#linux下安装"></a> Linux下安装</h2>
+<p>下载并安装：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://storage.googleapis.com/golang/go1.25.1.linux-amd64.tar.gz</span><br><span class="line"><span class="built_in">rm</span> -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.25.1.linux-amd64.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+<p>在 <code>$HOME/.profile</code> 或 <code>/etc/profile</code>中添加以下内容：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/go/bin</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="包-导入与可见性"><a class="markdownIt-Anchor" href="#包-导入与可见性"></a> 包、导入与可见性</h2>
 <p>每个 <code>.go</code> 文件相当于一个包。</p>
 <p>文件开头使用 <code>package main</code> 声明包的名字 <code>main</code>。</p>
@@ -61,12 +66,22 @@
 <figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ( <span class="string">"fmt"</span> ; <span class="string">"os"</span> )</span><br></pre></td></tr></tbody></table></figure>
 <p>若包中的标识符以一个大写字母开头，则在外部可见。<br>
 也可以为包定义别名：<code>import 别名 "包名"</code></p>
+<h2 id="模块管理"><a class="markdownIt-Anchor" href="#模块管理"></a> 模块管理</h2>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">go</span> mod init mymodule</span><br><span class="line">$ <span class="keyword">go</span> mod tidy</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="常量"><a class="markdownIt-Anchor" href="#常量"></a> 常量</h2>
 <p>常量的类型可以自动推断，也可以使用任何大小和类型也<strong>不会溢出</strong>。</p>
 <figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> b, c, d = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    b = <span class="number">2</span></span><br><span class="line">    c = <span class="number">3</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Unknown = <span class="number">0</span></span><br><span class="line">	Female = <span class="number">1</span></span><br><span class="line">	Male = <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	a = <span class="literal">iota</span>  <span class="comment">// a = 0</span></span><br><span class="line">	b         <span class="comment">// b = 1</span></span><br><span class="line">	c         <span class="comment">// c = 2</span></span><br><span class="line">	d = <span class="number">5</span>     <span class="comment">// d = 5   </span></span><br><span class="line">	e         <span class="comment">// e = 5</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	_           = <span class="literal">iota</span>             <span class="comment">// 使用 _ 忽略不需要的 iota</span></span><br><span class="line">	KB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)          <span class="comment">// 1 &lt;&lt; (10*1)</span></span><br><span class="line">	MB                             <span class="comment">// 1 &lt;&lt; (10*2)</span></span><br><span class="line">	GB                             <span class="comment">// 1 &lt;&lt; (10*3)</span></span><br><span class="line">	TB                             <span class="comment">// 1 &lt;&lt; (10*4)</span></span><br><span class="line">	PB                             <span class="comment">// 1 &lt;&lt; (10*5)</span></span><br><span class="line">	EB                             <span class="comment">// 1 &lt;&lt; (10*6)</span></span><br><span class="line">	ZB                             <span class="comment">// 1 &lt;&lt; (10*7)</span></span><br><span class="line">	YB                             <span class="comment">// 1 &lt;&lt; (10*8)</span></span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="流程控制语句"><a class="markdownIt-Anchor" href="#流程控制语句"></a> 流程控制语句</h2>
-<p>if-else 语句必须使用大括号，即使只有一条语句。<br>
-右大括号与 <code>else</code> 必须在同一行。</p>
+<p>if-else 语句必须使用大括号，即使只有一条语句。右大括号与 <code>else</code> 必须在同一行。</p>
+<p>循环只能使用 <code>for</code> 语句。</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i:=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++ {</span><br><span class="line">	<span class="built_in">println</span>(i)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h2>
+<h2 id="结构体"><a class="markdownIt-Anchor" href="#结构体"></a> 结构体</h2>
+<p>结构体可以附加标签，一般用来控制JSON的格式。<br>
+例子：</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Topic <span class="keyword">struct</span> {</span><br><span class="line">	Name      <span class="type">string</span> <span class="string">`json:"name"`</span></span><br><span class="line">	Statement <span class="type">string</span> <span class="string">`json:"statement"`</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">type</span> Response <span class="keyword">struct</span> {</span><br><span class="line">	Status  <span class="type">string</span> <span class="string">`json:"status"`</span></span><br><span class="line">	Message <span class="type">string</span> <span class="string">`json:"message"`</span></span><br><span class="line">	Data    any    <span class="string">`json:"data"`</span></span><br><span class="line">}</span><br><span class="line">response := Response{</span><br><span class="line">	Status: <span class="string">"success"</span>,</span><br><span class="line">	Data:   topics,</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="mysqlmariadb"><a class="markdownIt-Anchor" href="#mysqlmariadb"></a> MySQL/MariaDB</h2>
+<h2 id="redis"><a class="markdownIt-Anchor" href="#redis"></a> Redis</h2>
 
   </section>
   <footer class="post-footer">
@@ -80,6 +95,10 @@
 </article>
 
 <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/articles/go-login/">
+        ← prev <!--使用 go 搭建用户认证系统-->
+    </a>
     
     <span class="page-number">•</span>
     

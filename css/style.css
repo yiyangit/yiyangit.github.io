@@ -1668,3 +1668,6 @@ code {
 #header-post #actions {
   direction: ltr !important;
 }
+.base {
+  display: none;
+}

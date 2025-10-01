@@ -1,54 +1,159 @@
-<!doctype html>
-<html lang="zh-CN">
-    <head>
-		
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="">
-        <link rel="shortcut icon" href="/asset/locklink.jpg"/>
-        <link rel="alternate" type="application/rss+xml" title="Locklink" href="">
-        <title>react + next.js 学习笔记 | Locklink&#39;s fantastic landscape</title>
-        <meta name="description" content="{{meta_description}}">
-
-        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
-        <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css">
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="关于 Next.js React 是一个用于构建用户界面的 js 库，而 Next.js 是在 React 上构建的框架。 Next.js 内置了路由、数据获取、API 路由、样式解决方案、国际化等常用功能，无需额外配置即可使用。  关于 Typescript Typescript 是 Javascript 的超集，在 JavaScript 的基础上增加了静态类型检查。 Typescript 在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react + next.js 学习笔记">
+<meta property="og:url" content="https://www.locklink.moe/articles/react_nextjs/index.html">
+<meta property="og:site_name" content="Locklink&#39;s fantastic landscape">
+<meta property="og:description" content="关于 Next.js React 是一个用于构建用户界面的 js 库，而 Next.js 是在 React 上构建的框架。 Next.js 内置了路由、数据获取、API 路由、样式解决方案、国际化等常用功能，无需额外配置即可使用。  关于 Typescript Typescript 是 Javascript 的超集，在 JavaScript 的基础上增加了静态类型检查。 Typescript 在">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-07-28T04:25:20.000Z">
+<meta property="article:modified_time" content="2025-07-29T10:02:08.383Z">
+<meta property="article:author" content="Locklink">
+<meta name="twitter:card" content="summary">
+    
+    
+      
         
-        </script>
-    <meta name="generator" content="Hexo 7.3.0">
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>react + next.js 学习笔记</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
+
+<body class="max-width mx-auto px3 ltr">
     
-		<body class="post-template">
-	
-
-        <header id="header">
-            <a id="logo" href="/"><img src="/asset/locklink.jpg" alt="Locklink's fantastic landscape" /></a>
-            <h1><a href="/">Locklink</a></h1>
-            <p>一つの幸福に集約された。今日と言う日は人類が真の幸福の舵を切った輝かしい歴史の転換である</p>
-            <div id="follow-icons">
-          <a target="_blank" rel="noopener" href="http://github.com/yiyangit"><i class="fa fa-github-square fa-2x"></i></a>
-          </div>
-<h6><a href="/about">About</a></h6>
-        </header>
-
-        <main id="content">
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/articles/algt/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/articles/cp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/react_nextjs/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/react_nextjs/&text=react + next.js 学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/react_nextjs/&is_video=false&description=react + next.js 学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=react + next.js 学习笔记&body=Check out this article: https://www.locklink.moe/articles/react_nextjs/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/react_nextjs/&name=react + next.js 学习笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/react_nextjs/&t=react + next.js 学习笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<article class="post">
-  July 28, 2025
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-nextjs"><span class="toc-number">1.</span> <span class="toc-text"> 关于 Next.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-typescript"><span class="toc-number">2.</span> <span class="toc-text"> 关于 Typescript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text"> 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nextjs-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text"> Next.js 目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text"> 常用组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F"><span class="toc-number">5.1.</span> <span class="toc-text"> 图像</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        react + next.js 学习笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Locklink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-28T04:25:20.000Z" class="dt-published" itemprop="datePublished">2025-07-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
   
 
-  <h1 class="post-title">react + next.js 学习笔记</h1>
-  <section class="post-content article-entry">
+  <div class="content e-content" itemprop="articleBody">
     <h2 id="关于-nextjs"><a class="markdownIt-Anchor" href="#关于-nextjs"></a> 关于 Next.js</h2>
 <p>React 是一个用于构建用户界面的 js 库，而 Next.js 是在 React 上构建的框架。</p>
 <p>Next.js 内置了路由、数据获取、API 路由、样式解决方案、国际化等常用功能，无需额外配置即可使用。</p>
@@ -59,50 +164,152 @@ Typescript 在构建 react 应用时默认开启，因此默认情况下代码�
 <h2 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h2>
 <p>执行命令创建项目：<code>npx create-next-app@latest</code></p>
 <p>创建项目时会出现一系列选项，一般来说全部默认即可：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">✔ What is your project named? … react-learn</span><br><span class="line">✔ Would you like to use TypeScript? … No / Yes</span><br><span class="line">✔ Would you like to use ESLint? … No / Yes</span><br><span class="line">✔ Would you like to use Tailwind CSS? … No / Yes</span><br><span class="line">✔ Would you like your code inside a `src/` directory? … No / Yes</span><br><span class="line">✔ Would you like to use App Router? (recommended) … No / Yes</span><br><span class="line">✔ Would you like to use Turbopack for `next dev`? … No / Yes</span><br><span class="line">✔ Would you like to customize the import alias (`@/*` by default)? … No / Yes</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">✔ What is your project named? … react-learn</span><br><span class="line">✔ Would you like to use TypeScript? … No / Yes</span><br><span class="line">✔ Would you like to use ESLint? … No / Yes</span><br><span class="line">✔ Would you like to use Tailwind CSS? … No / Yes</span><br><span class="line">✔ Would you like your code inside a `src/` directory? … No / Yes</span><br><span class="line">✔ Would you like to use App Router? (recommended) … No / Yes</span><br><span class="line">✔ Would you like to use Turbopack for `next dev`? … No / Yes</span><br><span class="line">✔ Would you like to customize the import alias (`@/*` by default)? … No / Yes</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="nextjs-目录结构"><a class="markdownIt-Anchor" href="#nextjs-目录结构"></a> Next.js 目录结构</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app/</span><br><span class="line">├── layout.tsx           # 根布局文件</span><br><span class="line">├── page.tsx             # 根页面</span><br><span class="line">└── page/              # 路由</span><br><span class="line">    ├── page.tsx         # 页面文件</span><br><span class="line">└── [slug]/              # 动态路由目录</span><br><span class="line">    ├── page.tsx         # 动态页面</span><br><span class="line">    └── layout.tsx       # 特定页面的布局</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">app/</span><br><span class="line">├── layout.tsx           # 根布局文件</span><br><span class="line">├── page.tsx             # 根页面</span><br><span class="line">└── page/              # 路由</span><br><span class="line">    ├── page.tsx         # 页面文件</span><br><span class="line">└── [slug]/              # 动态路由目录</span><br><span class="line">    ├── page.tsx         # 动态页面</span><br><span class="line">    └── layout.tsx       # 特定页面的布局</span><br></pre></td></tr></tbody></table></figure>
 <p><code>app/layout.tsx</code> 一般用于设置整个应用的页面布局，包含html、body标签等，所有子页面都会被嵌套在这个布局内。</p>
 <p><code>page.tsx</code> 对应某个页面的内容， 比如 <code>page/page.tsx</code> 对应 <code>/page</code> 页面。</p>
 <p>形如 <code>[slug]</code> 则为动态内容，根据传入的参数路由页面。<br>
 例如 <code>article/[id]/page.tsx</code> 文件：</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use client'</span>;</span><br><span class="line"><span class="keyword">import</span> { useParams } <span class="keyword">from</span> <span class="string">"next/navigation"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> (<span class="params"></span>) {</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Article Page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Article ID: {useParams().id}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line"><span class="string">'use client'</span>;</span><br><span class="line"><span class="keyword">import</span> { useParams } <span class="keyword">from</span> <span class="string">"next/navigation"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> (<span class="params"></span>) {</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Article Page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Article ID: {useParams().id}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>访问 <code>/article/1</code> 会显示传入的参数。</p>
 <h2 id="常用组件"><a class="markdownIt-Anchor" href="#常用组件"></a> 常用组件</h2>
 <h3 id="图像"><a class="markdownIt-Anchor" href="#图像"></a> 图像</h3>
 <p><code>import Image from "next/image";</code></p>
 
-  </section>
-  <footer class="post-footer">
-    <!--
-    <section class="author">
-      <h4>Locklink</h4>
-      <p></p>
-    </section>
-    -->
-  </footer>
+  </div>
 </article>
 
-<nav class="pagination" role="pagination">
-    
-    <a class="newer-posts" href="/articles/algt/">
-        ← prev <!--算法竞赛模板-->
-    </a>
-    
-    <span class="page-number">•</span>
-    
-    <a class="older-posts" href="/articles/cp/">
-        <!--ACM刷题笔记 2025.7-2025.8--> next →
-    </a>
-    
-</nav>
 
 
-        </main>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-nextjs"><span class="toc-number">1.</span> <span class="toc-text"> 关于 Next.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-typescript"><span class="toc-number">2.</span> <span class="toc-text"> 关于 Typescript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text"> 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nextjs-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text"> Next.js 目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text"> 常用组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F"><span class="toc-number">5.1.</span> <span class="toc-text"> 图像</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/react_nextjs/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/react_nextjs/&text=react + next.js 学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/react_nextjs/&is_video=false&description=react + next.js 学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=react + next.js 学习笔记&body=Check out this article: https://www.locklink.moe/articles/react_nextjs/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/react_nextjs/&title=react + next.js 学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/react_nextjs/&name=react + next.js 学习笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/react_nextjs/&t=react + next.js 学习笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
         <footer id="footer">
-            <section id="footer-message">&copy; 2025 Locklink. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
-        </footer>
-    </body>
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Locklink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>
-
-

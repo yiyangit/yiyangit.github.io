@@ -1,54 +1,159 @@
-<!doctype html>
-<html lang="zh-CN">
-    <head>
-		
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="">
-        <link rel="shortcut icon" href="/asset/locklink.jpg"/>
-        <link rel="alternate" type="application/rss+xml" title="Locklink" href="">
-        <title>ACM刷题笔记 2025.7-2025.8 | Locklink&#39;s fantastic landscape</title>
-        <meta name="description" content="{{meta_description}}">
-
-        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
-        <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/latest/katex.min.css">
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="只记不会或者挂了的题。  目录  ABC410D XOR Shortest Walk ABC410E Battles in a Row HDU6227 Rabbits CF2128E1 Submedians (Easy Version) CF2130D Stay or Mirror    ABC410D XOR Shortest Walk 给定一个有向图，包含 N 个顶点和 M 条边。顶点编号为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACM刷题笔记 2025.7-2025.8">
+<meta property="og:url" content="https://www.locklink.moe/articles/cp/index.html">
+<meta property="og:site_name" content="Locklink&#39;s fantastic landscape">
+<meta property="og:description" content="只记不会或者挂了的题。  目录  ABC410D XOR Shortest Walk ABC410E Battles in a Row HDU6227 Rabbits CF2128E1 Submedians (Easy Version) CF2130D Stay or Mirror    ABC410D XOR Shortest Walk 给定一个有向图，包含 N 个顶点和 M 条边。顶点编号为">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-07-19T03:57:05.000Z">
+<meta property="article:modified_time" content="2025-08-18T14:38:35.925Z">
+<meta property="article:author" content="Locklink">
+<meta name="twitter:card" content="summary">
+    
+    
+      
         
-        </script>
-    <meta name="generator" content="Hexo 7.3.0">
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ACM刷题笔记 2025.7-2025.8</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
+
+<body class="max-width mx-auto px3 ltr">
     
-		<body class="post-template">
-	
-
-        <header id="header">
-            <a id="logo" href="/"><img src="/asset/locklink.jpg" alt="Locklink's fantastic landscape" /></a>
-            <h1><a href="/">Locklink</a></h1>
-            <p>一つの幸福に集約された。今日と言う日は人類が真の幸福の舵を切った輝かしい歴史の転換である</p>
-            <div id="follow-icons">
-          <a target="_blank" rel="noopener" href="http://github.com/yiyangit"><i class="fa fa-github-square fa-2x"></i></a>
-          </div>
-<h6><a href="/about">About</a></h6>
-        </header>
-
-        <main id="content">
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/articles/react_nextjs/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/articles/harmonics/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/cp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/cp/&text=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/cp/&is_video=false&description=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ACM刷题笔记 2025.7-2025.8&body=Check out this article: https://www.locklink.moe/articles/cp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/cp/&name=ACM刷题笔记 2025.7-2025.8&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/cp/&t=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<article class="post">
-  July 19, 2025
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#abc410d-xor-shortest-walk"><span class="toc-number">2.</span> <span class="toc-text"> ABC410D XOR Shortest Walk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#abc410e-battles-in-a-row"><span class="toc-number">3.</span> <span class="toc-text"> ABC410E Battles in a Row</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-2"><span class="toc-number">3.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hdu6227-rabbits"><span class="toc-number">4.</span> <span class="toc-text"> HDU6227 Rabbits</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-3"><span class="toc-number">4.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cf2128e1-submedians-easy-version"><span class="toc-number">5.</span> <span class="toc-text"> CF2128E1 Submedians (Easy Version)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-4"><span class="toc-number">5.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cf2130d-stay-or-mirror"><span class="toc-number">6.</span> <span class="toc-text"> CF2130D Stay or Mirror</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-5"><span class="toc-number">6.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ACM刷题笔记 2025.7-2025.8
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Locklink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-19T03:57:05.000Z" class="dt-published" itemprop="datePublished">2025-07-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
   
 
-  <h1 class="post-title">ACM刷题笔记 2025.7-2025.8</h1>
-  <section class="post-content article-entry">
+  <div class="content e-content" itemprop="articleBody">
     <p>只记不会或者挂了的题。</p>
 <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
 <ul>
@@ -100,37 +205,139 @@ H,M,N,A_i,B_i &lt;= 3000。</p>
 <h3 id="解析-5"><a class="markdownIt-Anchor" href="#解析-5"></a> 解析</h3>
 <p>数据范围极小，最多可以接受 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(n^3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 复杂度。显然增大后的数字比所有未增大的数字要大，考虑依次从最小的数开始考虑，其对答案的贡献就是其之前的数字数量（不增大）和之后的数字数量（增大）的最小值，计算贡献之后将其删除即可。<a target="_blank" rel="noopener" href="https://vjudge.net/solution/62964100">submission</a></p>
 
-  </section>
-  <footer class="post-footer">
-    <!--
-    <section class="author">
-      <h4>Locklink</h4>
-      <p></p>
-    </section>
-    -->
-  </footer>
+  </div>
 </article>
 
-<nav class="pagination" role="pagination">
-    
-    <a class="newer-posts" href="/articles/react_nextjs/">
-        ← prev <!--react + next.js 学习笔记-->
-    </a>
-    
-    <span class="page-number">•</span>
-    
-    <a class="older-posts" href="/articles/harmonics/">
-        <!--音乐理论学习笔记.和声学--> next →
-    </a>
-    
-</nav>
 
 
-        </main>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#abc410d-xor-shortest-walk"><span class="toc-number">2.</span> <span class="toc-text"> ABC410D XOR Shortest Walk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#abc410e-battles-in-a-row"><span class="toc-number">3.</span> <span class="toc-text"> ABC410E Battles in a Row</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-2"><span class="toc-number">3.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hdu6227-rabbits"><span class="toc-number">4.</span> <span class="toc-text"> HDU6227 Rabbits</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-3"><span class="toc-number">4.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cf2128e1-submedians-easy-version"><span class="toc-number">5.</span> <span class="toc-text"> CF2128E1 Submedians (Easy Version)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-4"><span class="toc-number">5.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cf2130d-stay-or-mirror"><span class="toc-number">6.</span> <span class="toc-text"> CF2130D Stay or Mirror</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-5"><span class="toc-number">6.1.</span> <span class="toc-text"> 解析</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/cp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/cp/&text=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/cp/&is_video=false&description=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ACM刷题笔记 2025.7-2025.8&body=Check out this article: https://www.locklink.moe/articles/cp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/cp/&title=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/cp/&name=ACM刷题笔记 2025.7-2025.8&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/cp/&t=ACM刷题笔记 2025.7-2025.8"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
         <footer id="footer">
-            <section id="footer-message">&copy; 2025 Locklink. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
-        </footer>
-    </body>
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Locklink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>
-
-

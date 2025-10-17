@@ -434,6 +434,12 @@ body td {
   padding: 0 8px;
   border-bottom: none;
 }
+body pre {
+  tab-size: 4;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  -webkit-tab-size: 4;
+}
 @font-face {
   font-style: normal;
   font-family: "Meslo LG";

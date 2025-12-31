@@ -1,0 +1,20 @@
+/*
+ * 自定义样式文件
+ * 用于扩展和覆盖 cactus 主题的默认样式
+ */
+/* 增加页面内容宽度 */
+.max-width {
+  max-width: 60rem; /* 从默认的 48rem 增加到 60rem */
+}
+/* 在大屏幕上进一步增加宽度 */
+@media (min-width: 1200px) {
+  .max-width {
+    max-width: 70rem;
+  }
+}
+/* 在超大屏幕上进一步增加宽度 */
+@media (min-width: 1600px) {
+  .max-width {
+    max-width: 80rem;
+  }
+}

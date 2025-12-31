@@ -444,6 +444,19 @@ body pre {
   font-family: "Meslo LG";
   src: local("Meslo LG S"), url("../lib/meslo-LG/MesloLGS-Regular.ttf") format("truetype");
 }
+.max-width {
+  max-width: 60rem; /* 从默认的 48rem 增加到 60rem */
+}
+@media (min-width: 1200px) {
+  .max-width {
+    max-width: 70rem;
+  }
+}
+@media (min-width: 1600px) {
+  .max-width {
+    max-width: 80rem;
+  }
+}
 *,
 *:before,
 *:after {

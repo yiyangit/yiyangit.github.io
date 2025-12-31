@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="lower_bound() &#x2F; upper_bound() lower_bound(begin, end, x); &#x2F;&#x2F; 返回第一个 &gt;&#x3D; x 的元素的迭代器upper_bound(begin, end, x); &#x2F;&#x2F; 返回第一个 &gt;  x 的元素的迭代器 若未找到，返回 end。在 vector 中求下标：it - vec.begin()。  map &#x2F; set mp[key] &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL">
+<meta property="og:url" content="https://www.locklink.moe/articles/STL/index.html">
+<meta property="og:site_name" content="Locklink&#39;s fantastic landscape">
+<meta property="og:description" content="lower_bound() &#x2F; upper_bound() lower_bound(begin, end, x); &#x2F;&#x2F; 返回第一个 &gt;&#x3D; x 的元素的迭代器upper_bound(begin, end, x); &#x2F;&#x2F; 返回第一个 &gt;  x 的元素的迭代器 若未找到，返回 end。在 vector 中求下标：it - vec.begin()。  map &#x2F; set mp[key] &#x3D;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-12-24T04:54:26.000Z">
+<meta property="article:modified_time" content="2025-12-24T05:06:39.668Z">
+<meta property="article:author" content="Locklink">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>STL</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+  <meta name="google-adsense-account" content="ca-pub-8535810076701421">
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/articles/freqtrade/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/articles/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/STL/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/STL/&text=STL"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/STL/&is_video=false&description=STL"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=STL&body=Check out this article: https://www.locklink.moe/articles/STL/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/STL/&name=STL&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/STL/&t=STL"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lower_bound-upper_bound"><span class="toc-number">1.</span> <span class="toc-text"> lower_bound() &#x2F; upper_bound()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map-set"><span class="toc-number">2.</span> <span class="toc-text"> map &#x2F; set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unordered_map-unordered_set"><span class="toc-number">3.</span> <span class="toc-text"> unordered_map &#x2F; unordered_set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-priority_queue"><span class="toc-number">4.</span> <span class="toc-text"> 4. priority_queue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-__gnu_pbds-tree-%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="toc-number">4.1.</span> <span class="toc-text"> 5. __gnu_pbds (Tree &#x2F; 平衡树)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.1.</span> <span class="toc-text"> 头文件</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        STL
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Locklink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-12-24T04:54:26.000Z" class="dt-published" itemprop="datePublished">2025-12-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="lower_bound-upper_bound"><a class="markdownIt-Anchor" href="#lower_bound-upper_bound"></a> <code>lower_bound()</code> / <code>upper_bound()</code></h2>
+<figure class="highlight cpp"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">lower_bound</span>(begin, end, x); <span class="comment">// 返回第一个 &gt;= x 的元素的迭代器</span></span><br><span class="line"><span class="built_in">upper_bound</span>(begin, end, x); <span class="comment">// 返回第一个 &gt;  x 的元素的迭代器</span></span><br></pre></td></tr></tbody></table></figure>
+<p>若未找到，返回 <code>end</code>。在 <code>vector</code> 中求下标：<code>it - vec.begin()</code>。</p>
+<h2 id="map-set"><a class="markdownIt-Anchor" href="#map-set"></a> <code>map</code> / <code>set</code></h2>
+<figure class="highlight cpp"><table><tbody><tr><td class="code"><pre><span class="line">mp[key] = val;       <span class="comment">// 插入或修改</span></span><br><span class="line">mp.<span class="built_in">count</span>(key);       <span class="comment">// 查是否存在 (0/1)</span></span><br><span class="line">mp.<span class="built_in">erase</span>(key);       <span class="comment">// 删除</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="code"><pre><span class="line">st.<span class="built_in">insert</span>(x);        <span class="comment">// 插入</span></span><br><span class="line">st.<span class="built_in">count</span>(x);         <span class="comment">// 查是否存在</span></span><br><span class="line">st.<span class="built_in">erase</span>(x);         <span class="comment">// 删除</span></span><br></pre></td></tr></tbody></table></figure>
+<p><code>map</code> 和 <code>set</code> 自己实现了 <code>lower_bound</code> 和 <code>upper_bound</code> 方法，注意 <code>map</code> 以 <strong>键</strong> 为查找依据。</p>
+<h2 id="unordered_map-unordered_set"><a class="markdownIt-Anchor" href="#unordered_map-unordered_set"></a> <code>unordered_map</code> / <code>unordered_set</code></h2>
+<p><strong>时间</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>（最坏 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>）。<br>
+<strong>区别</strong>：不支持 <code>lower_bound</code>，遍历无序。</p>
+<h2 id="4-priority_queue"><a class="markdownIt-Anchor" href="#4-priority_queue"></a> 4. <code>priority_queue</code></h2>
+<p><strong>时间</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="code"><pre><span class="line">priority_queue&lt;T&gt; pq;<span class="comment">//大根堆</span></span><br><span class="line">pq.<span class="built_in">push</span>(x);    <span class="comment">// 入队</span></span><br><span class="line">pq.<span class="built_in">top</span>();      <span class="comment">// 取队首</span></span><br><span class="line">pq.<span class="built_in">pop</span>();      <span class="comment">// 出队</span></span><br><span class="line"><span class="comment">// 小根堆写法：</span></span><br><span class="line">priority_queue&lt;T, vector&lt;T&gt;, greater&lt;T&gt;&gt; pq;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="5-__gnu_pbds-tree-平衡树"><a class="markdownIt-Anchor" href="#5-__gnu_pbds-tree-平衡树"></a> 5. <code>__gnu_pbds</code> (Tree / 平衡树)</h3>
+<h4 id="头文件"><a class="markdownIt-Anchor" href="#头文件"></a> 头文件</h4>
+<figure class="highlight cpp"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext/pb_ds/assoc_container.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext/pb_ds/tree_policy.hpp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __gnu_pbds;</span><br></pre></td></tr></tbody></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lower_bound-upper_bound"><span class="toc-number">1.</span> <span class="toc-text"> lower_bound() &#x2F; upper_bound()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map-set"><span class="toc-number">2.</span> <span class="toc-text"> map &#x2F; set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unordered_map-unordered_set"><span class="toc-number">3.</span> <span class="toc-text"> unordered_map &#x2F; unordered_set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-priority_queue"><span class="toc-number">4.</span> <span class="toc-text"> 4. priority_queue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-__gnu_pbds-tree-%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="toc-number">4.1.</span> <span class="toc-text"> 5. __gnu_pbds (Tree &#x2F; 平衡树)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.1.</span> <span class="toc-text"> 头文件</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/STL/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/STL/&text=STL"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/STL/&is_video=false&description=STL"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=STL&body=Check out this article: https://www.locklink.moe/articles/STL/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/STL/&title=STL"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/STL/&name=STL&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/STL/&t=STL"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Locklink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

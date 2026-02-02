@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="最近开始鼓捣自己的开发环境，Windows提供的WSL非常好用，但是在没人指导的情况下踩了不少坑，特此记录一下。  安装VScode 没啥好说的。官网 https:&#x2F;&#x2F;code.visualstudio.com&#x2F; 下载。  安装WSL powershell里执行命令 wsl --install 等待下载安装，设置 Linux 系统用户名和密码。 随后查看发行版版本： $ lsb_release -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL下vscode开发环境配置记录">
+<meta property="og:url" content="https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Locklink&#39;s fantastic landscape">
+<meta property="og:description" content="最近开始鼓捣自己的开发环境，Windows提供的WSL非常好用，但是在没人指导的情况下踩了不少坑，特此记录一下。  安装VScode 没啥好说的。官网 https:&#x2F;&#x2F;code.visualstudio.com&#x2F; 下载。  安装WSL powershell里执行命令 wsl --install 等待下载安装，设置 Linux 系统用户名和密码。 随后查看发行版版本： $ lsb_release -">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-06-21T03:55:09.563Z">
+<meta property="article:modified_time" content="2026-02-02T04:16:03.390Z">
+<meta property="article:author" content="Locklink">
+<meta property="article:tag" content="开发">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>WSL下vscode开发环境配置记录</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+  <meta name="google-adsense-account" content="ca-pub-8535810076701421">
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/articles/dev_misc/nodejs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&text=WSL下vscode开发环境配置记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&is_video=false&description=WSL下vscode开发环境配置记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WSL下vscode开发环境配置记录&body=Check out this article: https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&name=WSL下vscode开发环境配置记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&t=WSL下vscode开发环境配置记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85vscode"><span class="toc-number">1.</span> <span class="toc-text"> 安装VScode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85wsl"><span class="toc-number">2.</span> <span class="toc-text"> 安装WSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-vscode"><span class="toc-number">3.</span> <span class="toc-text"> 启动 VSCode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E5%90%AF%E5%8A%A8vscode"><span class="toc-number">3.1.</span> <span class="toc-text"> 正确启动VSCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95"><span class="toc-number">3.2.</span> <span class="toc-text"> 安装扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-cline"><span class="toc-number">4.</span> <span class="toc-text"> 安装 Cline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-git"><span class="toc-number">5.</span> <span class="toc-text"> 配置 git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-pip"><span class="toc-number">6.</span> <span class="toc-text"> 关于 pip</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        WSL下vscode开发环境配置记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Locklink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-21T03:55:09.563Z" class="dt-published" itemprop="datePublished">2025-06-21</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>最近开始鼓捣自己的开发环境，Windows提供的WSL非常好用，但是在没人指导的情况下踩了不少坑，特此记录一下。</p>
+<h2 id="安装vscode"><a class="markdownIt-Anchor" href="#安装vscode"></a> 安装VScode</h2>
+<p>没啥好说的。官网 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> 下载。</p>
+<h2 id="安装wsl"><a class="markdownIt-Anchor" href="#安装wsl"></a> 安装WSL</h2>
+<p>powershell里执行命令<br>
+<code>wsl --install</code><br>
+等待下载安装，设置 Linux 系统用户名和密码。</p>
+<p>随后查看发行版版本：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Ubuntu</span><br><span class="line">Description:    Ubuntu 24.04.2 LTS</span><br><span class="line">Release:        24.04</span><br><span class="line">Codename:       noble</span><br></pre></td></tr></tbody></table></figure>
+<p>发现安装的是最新的 Ubuntu LTS 版本，对我来说完全够用的。</p>
+<p>然后再把 Windows 默认终端改成 Ubuntu。</p>
+<hr>
+<p>打开 WSL 终端时可能会提示：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">wsl: 检测到 localhost 代理配置，但未镜像到 wsl。nat 模式下的 wsl 不支持 localhost 代理。</span><br></pre></td></tr></tbody></table></figure>
+<p>为了解决这个问题，在 <code>C:\Users\你的用户名</code> 下创建文件 <code>.wslconfig</code> ，输入以下内容：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[experimental]</span><br><span class="line">autoMemoryReclaim=gradual</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">dnsTunneling=true</span><br><span class="line">firewall=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></tbody></table></figure>
+<p>关闭 WSL：<code>wsl --shutdown</code><br>
+重新启动 WSL 终端。</p>
+<h2 id="启动-vscode"><a class="markdownIt-Anchor" href="#启动-vscode"></a> 启动 VSCode</h2>
+<h3 id="正确启动vscode"><a class="markdownIt-Anchor" href="#正确启动vscode"></a> 正确启动VSCode</h3>
+<p>这一步看似没有必要说，实际上是踩的最大的一个坑（哭）。</p>
+<p>昨天本来以为大功告成了，实际上后来遇到各种各样的问题，都是这一步埋下的雷。</p>
+<p>如果想让 vscode 和WSL系统无缝衔接，就<strong>不能</strong>在 Windows 的桌面图标/任务栏/开始菜单直接启动 vscode 。</p>
+<p><strong>应该</strong>：在 Linux 终端下，你的工作区里执行命令 <code>code .</code></p>
+<p>初次启动可能会提示正在启动服务器啥的，等待即可。</p>
+<h3 id="安装扩展"><a class="markdownIt-Anchor" href="#安装扩展"></a> 安装扩展</h3>
+<p>在 WSL 中使用 vscode 通常必须安装 WSL 扩展来支持 vscode 和 WSL 之间的通信。<br>
+另外大部分已经安装的扩展需要重新在 WSL 的 vscode 中安装。</p>
+<h2 id="安装-cline"><a class="markdownIt-Anchor" href="#安装-cline"></a> 安装 Cline</h2>
+<p>Cline 是一个 AI编程 vscode 扩展，可以自主编辑代码、执行命令。如果 vscode 没有正确从 WSL 启动，那么执行命令时 Cline 没办法和终端交互，就会出现 <code>Shell Integration Unavailable</code> 。网上的各种解决方案大部分都是针对 Mac 系统，基本没有提到 WSL 的（再哭）</p>
+<h2 id="配置-git"><a class="markdownIt-Anchor" href="#配置-git"></a> 配置 git</h2>
+<p>还没摸索出来。WIP。</p>
+<h2 id="关于-pip"><a class="markdownIt-Anchor" href="#关于-pip"></a> 关于 pip</h2>
+<p>使用pip安装包的时候可能会出现 <code>error: externally-managed-environment</code>，这倒不是 WSL 的问题。</p>
+<blockquote>
+<p>externally-managed-environment 错误背后的原因：Manjaro 、Ubuntu、Fedora 以及其他的最新发行版中，正在使用 Python 包来实现此增强功能。<br>
+这个更新是为了避免「操作系统包管理器 (如pacman、yum、apt) 和 pip 等特定于 Python 的包管理工具之间的冲突」。<br>
+这些冲突包括 Python 级 API 不兼容和文件所有权冲突。<br>
+（摘自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaohuaxishi/p/17515019.html">https://www.cnblogs.com/zhaohuaxishi/p/17515019.html</a> ）</p>
+</blockquote>
+<p>执行<br>
+<code>sudo mv /usr/lib/python3.x/EXTERNALLY-MANAGED /usr/lib/python3.x/EXTERNALLY-MANAGED.bak</code> 即可。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85vscode"><span class="toc-number">1.</span> <span class="toc-text"> 安装VScode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85wsl"><span class="toc-number">2.</span> <span class="toc-text"> 安装WSL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-vscode"><span class="toc-number">3.</span> <span class="toc-text"> 启动 VSCode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E5%90%AF%E5%8A%A8vscode"><span class="toc-number">3.1.</span> <span class="toc-text"> 正确启动VSCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95"><span class="toc-number">3.2.</span> <span class="toc-text"> 安装扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-cline"><span class="toc-number">4.</span> <span class="toc-text"> 安装 Cline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-git"><span class="toc-number">5.</span> <span class="toc-text"> 配置 git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-pip"><span class="toc-number">6.</span> <span class="toc-text"> 关于 pip</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&text=WSL下vscode开发环境配置记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&is_video=false&description=WSL下vscode开发环境配置记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WSL下vscode开发环境配置记录&body=Check out this article: https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&title=WSL下vscode开发环境配置记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&name=WSL下vscode开发环境配置记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.locklink.moe/articles/dev_misc/WSL%E4%B8%8Bvscode%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/&t=WSL下vscode开发环境配置记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Locklink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

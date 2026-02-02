@@ -465,7 +465,7 @@ body pre {
 .content h4,
 .content h5,
 .content h6 {
-  font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+  font-family: sans-serif;
 }
 *,
 *:before,
